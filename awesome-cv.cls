@@ -14,14 +14,14 @@
 % should not need to edit it.
 %
 % Class license:
-% LPPL v1.5c (http://www.latex-project.org/lppl)
+% LPPL v1.3c (http://www.latex-project.org/lppl)
 %
 
 
 %-------------------------------------------------------------------------------
 %                Identification
 %-------------------------------------------------------------------------------
-\ProvidesClass{awesome-cv}[2015/12/14 v1.5 Awesome Curriculum Vitae Class]
+\ProvidesClass{awesome-cv}[2015/12/14 v1.3 Awesome Curriculum Vitae Class]
 \NeedsTeXFormat{LaTeX2e}
 
 
