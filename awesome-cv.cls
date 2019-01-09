@@ -14,14 +14,14 @@
 % should not need to edit it.
 %
 % Class license:
-% LPPL v1.3c (http://www.latex-project.org/lppl)
+% LPPL v1.5c (http://www.latex-project.org/lppl)
 %
 
 
 %-------------------------------------------------------------------------------
 %                Identification
 %-------------------------------------------------------------------------------
-\ProvidesClass{awesome-cv}[2015/12/14 v1.3 Awesome Curriculum Vitae Class]
+\ProvidesClass{awesome-cv}[2015/12/14 v1.5 Awesome Curriculum Vitae Class]
 \NeedsTeXFormat{LaTeX2e}
 
 
@@ -533,12 +533,22 @@
 \newcommand*{\cventry}[5]{
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{12.5cm} R{4.5cm}}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{.7\linewidth} R{.3\linewidth}}
     \ifempty{#2#3}
       {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
       {\entrytitlestyle{#2} & \entrylocationstyle{#3} \\
       \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
-    \multicolumn{2}{L{17cm}}{\descriptionstyle{#5}} \\
+    \multicolumn{2}{L{\linewidth}}{\descriptionstyle{#5}} \\
+  \end{tabular*}
+}
+
+    % Define an entry for course listings
+% Usage: \cventry{<class name>}{<school>}
+\newcommand*{\cvcourse}[2]{
+  \setlength\tabcolsep{0pt}
+  \setlength{\extrarowheight}{0pt}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{.7\linewidth} R{.3\linewidth}}
+      \descriptionstyle{#1} & \entrydatestyle{#2}
   \end{tabular*}
 }
 
@@ -553,7 +563,7 @@
 \newcommand*{\cvsubentry}[4]{
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{12.5cm} R{4.5cm}}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{.7\linewidth} R{.3\linewidth}}
     \setlength\leftskip{0.2cm}
     \subentrytitlestyle{#2} & \ifthenelse{\equal{#1}{}}
       {\subentrydatestyle{#3}}{} 
@@ -562,7 +572,7 @@
       {\subentrypositionstyle{#1} & \subentrydatestyle{#3} \\}
     \ifthenelse{\equal{#4}{}}
       {}
-      {\multicolumn{2}{L{17.0cm}}{\subdescriptionstyle{#4}} \\}
+      {\multicolumn{2}{L{\linewidth}}{\subdescriptionstyle{#4}} \\}
   \end{tabular*}
 }
 
@@ -612,4 +622,3 @@
   \end{justify}
   \vspace{-2mm}
 }
-

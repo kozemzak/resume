@@ -48,6 +48,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% Needed to divide into several files
 \usepackage{import}
+\usepackage{multicol}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,7 +76,15 @@
 \makecvheader
 
 %%% Import contents
-\import{\sectiondir}{education.tex}
+\begin{minipage}[t]{.4875\linewidth}
+  \import{\sectiondir}{education.tex}
+\end{minipage}%
+\begin{minipage}[t]{.025\linewidth}
+  \hspace{.05\linewidth}
+\end{minipage}%
+\begin{minipage}[t]{.4875\linewidth}
+  \import{\sectiondir}{coursework.tex}
+\end{minipage}
 \import{\sectiondir}{research.tex}
 \import{\sectiondir}{projects.tex}
 \import{\sectiondir}{awards.tex}
