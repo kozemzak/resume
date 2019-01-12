@@ -222,8 +222,8 @@
 %-------------------------------------------------------------------------------
 % Configure styles for each CV elements
 % For fundamental structures
-\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{32pt}{1em}\headerfontlight\color{graytext} #1}}
-\newcommand*{\headerlastnamestyle}[1]{{\fontsize{32pt}{1em}\headerfont\bfseries\color{text} #1}}
+\newcommand*{\headerfirstnamestyle}[1]{{\fontsize{24pt}{1em}\headerfontlight\color{graytext} #1}}
+\newcommand*{\headerlastnamestyle}[1]{{\fontsize{24pt}{1em}\headerfont\bfseries\color{text} #1}}
 \newcommand*{\headerpositionstyle}[1]{{\fontsize{7.6pt}{1em}\bodyfont\scshape\color{awesome} #1}}
 \newcommand*{\headeraddressstyle}[1]{{\fontsize{8pt}{1em}\headerfont\itshape\color{graytext} #1}}
 \newcommand*{\headersocialstyle}[1]{{\fontsize{6.8pt}{1em}\headerfont\color{text} #1}}
@@ -400,18 +400,18 @@
     }
     \\
     \vspace{0.4mm}
-    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\}}
-    \vspace{0.4mm}
-    \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\}}
-    \vspace{-0.5mm}
     \headersocialstyle{
       \newbool{isstart}
       \setbool{isstart}{true}
-      \ifthenelse{\isundefined{\@mobile}}
+      \ifthenelse{\isundefined{\@linkedin}}
         {}
         {
-          \faMobile\ \@mobile
-          \setbool{isstart}{false}
+          \ifbool{isstart}
+            {
+              \setbool{istart}{false} 
+            }
+            {\@headersocialsep}
+          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedinSquare\ \@linkedin}
         }
       \ifthenelse{\isundefined{\@email}}
         {}
@@ -453,16 +453,6 @@
             {\@headersocialsep}
           \href{https://stackoverflow.com/users/\@stackoverflowid}{\faStackOverflow\ \@stackoverflowname}
         }
-      \ifthenelse{\isundefined{\@linkedin}}
-        {}
-        {
-          \ifbool{isstart}
-            {
-              \setbool{istart}{false} 
-            }
-            {\@headersocialsep}
-          \href{https://www.linkedin.com/in/\@linkedin}{\faLinkedinSquare\ \@linkedin}
-        }
       \ifthenelse{\isundefined{\@twitter}}
         {}
         {
@@ -472,6 +462,12 @@
             }
             {\@headersocialsep}
           \href{https://twitter.com/\@twitter}{\faTwitter\ \@twitter}
+        }
+      \ifthenelse{\isundefined{\@mobile}}
+        {}
+        {
+          \faMobile\ \@mobile
+          \setbool{isstart}{false}
         }
       \ifthenelse{\isundefined{\@skype}}
         {}
@@ -486,7 +482,11 @@
     } \\
     \ifthenelse{\isundefined{\@quote}}
       {}
-      {\vspace{4.0mm}\headerquotestyle{\@quote\\}\vspace{3.0mm}}
+      {\vspace{1.5mm}\headerquotestyle{\@quote\\}\vspace{6.0mm}}
+    \ifthenelse{\isundefined{\@position}}{}{\headerpositionstyle{\@position\\}}
+    \vspace{0.4mm}
+    \ifthenelse{\isundefined{\@address}}{}{\headeraddressstyle{\@address\\}}
+    \vspace{-0.5mm}
   \end{center}
 }
 
@@ -542,13 +542,17 @@
   \end{tabular*}
 }
 
-    % Define an entry for course listings
-% Usage: \cventry{<class name>}{<school>}
-\newcommand*{\cvcourse}[2]{
+% Define an entry of cv information
+% Usage: \cvprojectentry{<position>}{<title>}{<location>}{<date>}{<description>}{<github>}
+\newcommand*{\cvprojectentry}[6]{
   \setlength\tabcolsep{0pt}
   \setlength{\extrarowheight}{0pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}} L{.7\linewidth} R{.3\linewidth}}
-      \descriptionstyle{#1} & \entrydatestyle{#2}
+    \ifempty{#2#3}
+      {\entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+      {\entrytitlestyle{#2} \ifempty{#6}{}{\href{https://github.com/#6}{\faGithubSquare}} & \entrylocationstyle{#3} \\
+      \entrypositionstyle{#1} & \entrydatestyle{#4} \\}
+    \multicolumn{2}{L{\linewidth}}{\descriptionstyle{#5}} \\
   \end{tabular*}
 }
 
